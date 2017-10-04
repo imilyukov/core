@@ -37,7 +37,7 @@ class FilesystemLoader extends \Twig_Loader_Filesystem {
     }
 
     foreach ($namespaces as $name => $path) {
-      $this->addPath($path . '/templates', $name);
+      $this->addPath(\Drupal::root() . '/' . $path . '/templates', $name);
     }
   }
 

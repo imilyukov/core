@@ -150,7 +150,7 @@ class Extension implements \Serializable {
    */
   public function __call($method, array $args) {
     if (!isset($this->splFileInfo)) {
-      $this->splFileInfo = new \SplFileInfo($this->pathname);
+      $this->splFileInfo = new \SplFileInfo($this->root . '/' . $this->pathname);
     }
     return call_user_func_array([$this->splFileInfo, $method], $args);
   }

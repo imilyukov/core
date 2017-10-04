@@ -46,7 +46,7 @@ class PhpStorageFactory {
       $configuration['bin'] = $name;
     }
     if (!isset($configuration['directory'])) {
-      $configuration['directory'] = PublicStream::basePath() . '/php';
+      $configuration['directory'] = \Drupal::root() . '/' . PublicStream::basePath() . '/php';
     }
     return new $class($configuration);
   }
