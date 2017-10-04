@@ -577,7 +577,7 @@ class DrupalKernel implements DrupalKernelInterface, TerminableInterface {
       'app' => [],
       'site' => [],
     ];
-    $this->serviceYamls['app']['core'] = 'core/core.services.yml';
+    $this->serviceYamls['app']['core'] = $this->root . '/core/core.services.yml';
     $this->serviceProviderClasses['app']['core'] = 'Drupal\Core\CoreServiceProvider';
 
     // Retrieve enabled modules and register their namespaces.
@@ -1239,7 +1239,7 @@ class DrupalKernel implements DrupalKernelInterface, TerminableInterface {
           is_dir($pathname . '/Entity') ||
           is_dir($pathname . '/Element')
         )) {
-          $namespaces[$parent_namespace . '\\' . $component->getFilename()] = $path . '/' . $component->getFilename();
+          $namespaces[$parent_namespace . '\\' . $component->getFilename()] = $this->root . '/' . $path . '/' . $component->getFilename();
         }
       }
     }
@@ -1414,7 +1414,7 @@ class DrupalKernel implements DrupalKernelInterface, TerminableInterface {
     $filenames = [];
     foreach ($this->moduleList as $module => $weight) {
       if ($data = $this->moduleData($module)) {
-        $filenames[$module] = $data->getPathname();
+        $filenames[$module] = $this->root . '/' . $data->getPathname();
       }
     }
     return $filenames;
@@ -1458,11 +1458,11 @@ class DrupalKernel implements DrupalKernelInterface, TerminableInterface {
     foreach ($namespaces as $prefix => $paths) {
       if (is_array($paths)) {
         foreach ($paths as $key => $value) {
-          $paths[$key] = $this->root . '/' . $value;
+          $paths[$key] = 0 !== strpos($value, $this->root) ? $this->root . '/' . $value : $value;
         }
       }
       elseif (is_string($paths)) {
-        $paths = $this->root . '/' . $paths;
+        $paths = 0 !== strpos($paths, $this->root) ? $this->root . '/' . $paths : $paths;
       }
       $class_loader->addPsr4($prefix . '\\', $paths);
     }
