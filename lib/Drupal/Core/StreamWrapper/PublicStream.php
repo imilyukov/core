@@ -40,7 +40,7 @@ class PublicStream extends LocalStream {
    * {@inheritdoc}
    */
   public function getDirectoryPath() {
-    return static::basePath();
+    return \Drupal::root() . '/' . static::basePath();
   }
 
   /**

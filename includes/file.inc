@@ -1222,7 +1222,7 @@ function file_directory_temp() {
 
     if (empty($temporary_directory)) {
       // If no directory has been found default to 'files/tmp'.
-      $temporary_directory = PublicStream::basePath() . '/tmp';
+      $temporary_directory = \Drupal::root() . '/' . PublicStream::basePath() . '/tmp';
 
       // Windows accepts paths with either slash (/) or backslash (\), but will
       // not accept a path which contains both a slash and a backslash. Since

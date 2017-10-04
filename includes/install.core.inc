@@ -1046,7 +1046,7 @@ function install_base_system(&$install_state) {
     // in the UI. If declared in settings.php, they would no longer be
     // configurable. The temporary directory needs to match what is set in each
     // test types ::prepareEnvironment() step.
-    $temporary_directory = dirname(PublicStream::basePath()) . '/temp';
+    $temporary_directory = dirname(\Drupal::root() . '/' . PublicStream::basePath()) . '/temp';
     file_prepare_directory($temporary_directory, FILE_MODIFY_PERMISSIONS | FILE_CREATE_DIRECTORY);
     \Drupal::configFactory()->getEditable('system.file')
       ->set('path.temporary', $temporary_directory)
