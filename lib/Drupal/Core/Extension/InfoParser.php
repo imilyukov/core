@@ -19,7 +19,7 @@ class InfoParser extends InfoParserDynamic {
    */
   public function parse($filename) {
     if (!isset(static::$parsedInfos[$filename])) {
-      static::$parsedInfos[$filename] = parent::parse($filename);
+      static::$parsedInfos[$filename] = parent::parse(\Drupal::root() . '/' . $filename);
     }
     return static::$parsedInfos[$filename];
   }

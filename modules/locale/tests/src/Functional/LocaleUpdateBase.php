@@ -179,7 +179,7 @@ EOF;
     \Drupal::state()->set('locale.remove_core_project', FALSE);
 
     // Setup the environment.
-    $public_path = PublicStream::basePath();
+    $public_path = \Drupal::root() . '/' . PublicStream::basePath();
     $this->setTranslationsDirectory($public_path . '/local');
     $config->set('translation.default_filename', '%project-%version.%language._po')->save();
 
