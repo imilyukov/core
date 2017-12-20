@@ -97,24 +97,26 @@ final class Settings {
     return self::$instance->storage;
   }
 
-  /**
-   * Bootstraps settings.php and the Settings singleton.
-   *
-   * @param string $app_root
-   *   The app root.
-   * @param string $site_path
-   *   The current site path.
-   * @param \Composer\Autoload\ClassLoader $class_loader
-   *   The class loader that is used for this request. Passed by reference and
-   *   exposed to the local scope of settings.php, so as to allow it to be
-   *   decorated with Symfony's ApcClassLoader, for example.
-   *
-   * @see default.settings.php
-   */
-  public static function initialize($app_root, $site_path, &$class_loader) {
+    /**
+     * Bootstraps settings.php and the Settings singleton.
+     *
+     * @param string $app_root
+     *   The app root.
+     * @param string $site_path
+     *   The current site path.
+     * @param \Composer\Autoload\ClassLoader $class_loader
+     *   The class loader that is used for this request. Passed by reference and
+     *   exposed to the local scope of settings.php, so as to allow it to be
+     *   decorated with Symfony's ApcClassLoader, for example.
+     *
+     * @param string $site_env
+     *
+     * @see default.settings.php
+     */
+  public static function initialize($app_root, $site_path, &$class_loader, $site_env = 'dev') {
     // Export these settings.php variables to the global namespace.
     global $config_directories, $config;
-    $settings = [];
+    $settings = ['site_env' => $site_env];
     $config = [];
     $databases = [];
 

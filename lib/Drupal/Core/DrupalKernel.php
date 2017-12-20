@@ -1042,7 +1042,7 @@ class DrupalKernel implements DrupalKernelInterface, TerminableInterface {
     $site_path = static::findSitePath($request);
     $this->setSitePath($site_path);
     $class_loader_class = get_class($this->classLoader);
-    Settings::initialize($this->root, $site_path, $this->classLoader);
+    Settings::initialize($this->root, $site_path, $this->classLoader, $this->environment);
 
     // Initialize our list of trusted HTTP Host headers to protect against
     // header attacks.
